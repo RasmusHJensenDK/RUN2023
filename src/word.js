@@ -40,8 +40,8 @@ const WordScrambleGame = () => {
   );
 
   const initGame = useCallback(() => {
-    setTimer(30);
-
+    setTimer(40);
+    setUserInput("");
     const randomWord = words[Math.floor(Math.random() * words.length)];
     setCorrectWord(randomWord.word.toLowerCase());
     setHint(randomWord.hint);
@@ -78,9 +78,9 @@ const WordScrambleGame = () => {
     const userWord = userInput.toLowerCase();
     if (!userWord) return alert("No word");
     if (userWord !== correctWord)
-      return alert(`Tillykke, du ka kalde dig dummere end en ugle. ${userWord} var forkert`);
+      return alert(`Nej nej nej, du ka kalde dig dummere end en ugle. ${userWord} var forkert`);
     alert(
-      `Tillykke, du hermed klogere end en ugle! ${correctWord.toUpperCase()} er helt korrekt!`
+      `Tillykke ${correctWord.toUpperCase()} er helt korrekt!`
     );
     initGame();
   };
