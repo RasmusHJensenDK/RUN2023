@@ -12,27 +12,27 @@ const WordScrambleGame = () => {
     () => [
       {
         word: "London",
-        hint: "By i England",
+        hint: "By i England 🏛️",
       },
       {
         word: "Rasmus",
-        hint: "Flot fyr",
+        hint: "Flot fyr 😁",
       },
       {
         word: "Mette",
-        hint: "Den vilde veninde",
+        hint: "Den vilde veninde 🥳",
       },
       {
         word: "Max",
-        hint: "Kæreste lille hund",
+        hint: "Herlige lille hund 🐕",
       },
       {
         word: "Trine",
-        hint: "Farlig billist?",
+        hint: "Farlig billist? 😁😘",
       },
       {
         word: "Idiot",
-        hint: "Rasmus kan godt nogen gange være een?",
+        hint: "Rasmus kan godt nogen gange være een? 😥",
       },
       // ... other words
     ],
@@ -87,7 +87,7 @@ const WordScrambleGame = () => {
 
   return (
     <div className="container">
-      <h2>Scrambler</h2>
+      <h2>Søndags hygge 🥳</h2>
       <div className="content">
         <p className="word">{scrambledWord}</p>
         <div className="details">
