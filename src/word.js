@@ -6,6 +6,7 @@ const WordScrambleGame = () => {
   const [timer, setTimer] = useState(30);
   const [scrambledWord, setScrambledWord] = useState("");
   const [userInput, setUserInput] = useState("");
+  const [hint, setHint] = useState("");
 
   const words = useMemo(
     () => [
@@ -39,12 +40,12 @@ const WordScrambleGame = () => {
   );
 
   const initGame = useCallback(() => {
-    clearInterval(timer);
     setTimer(30);
 
-    const randomWord = words[Math.floor(Math.random() * words.length)].word;
-    setCorrectWord(randomWord.toLowerCase());
-  }, [timer, words]);
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    setCorrectWord(randomWord.word.toLowerCase());
+    setHint(randomWord.hint);
+  }, [words]);
 
   useEffect(() => {
     initGame();
@@ -59,16 +60,19 @@ const WordScrambleGame = () => {
   useEffect(() => {
     // Timer logic
     const interval = setInterval(() => {
-      if (timer > 0) {
-        setTimer((prev) => prev - 1);
-      } else {
-        alert(`Du fandme langsom hva?! ${correctWord.toUpperCase()} sku du ha gættet.`);
-        initGame();
-      }
+      setTimer((prev) => {
+        if (prev > 0) {
+          return prev - 1;
+        } else {
+          alert(`Du fandme langsom hva?! ${correctWord.toUpperCase()} sku du ha gættet.`);
+          initGame();
+          return prev;
+        }
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timer, correctWord, initGame]);
+  }, [correctWord, initGame]);
 
   const checkWord = () => {
     const userWord = userInput.toLowerCase();
@@ -88,7 +92,7 @@ const WordScrambleGame = () => {
         <p className="word">{scrambledWord}</p>
         <div className="details">
           <p className="hint">
-            Hint: <span>{words.find((word) => word.word === correctWord)?.hint}</span>
+            Hint: <span>{hint}</span>
           </p>
           <p className="time">
             Time Left: <span><b>{timer}</b>s</span>
@@ -102,8 +106,8 @@ const WordScrambleGame = () => {
           onChange={(e) => setUserInput(e.target.value)}
         />
         <div className="buttons">
-          <button onClick={initGame}>Refresh Word</button>
-          <button onClick={checkWord}>Check Word</button>
+          <button onClick={initGame}>Nyt ord</button>
+          <button onClick={checkWord}>Jeg er sikker!</button>
         </div>
       </div>
     </div>
