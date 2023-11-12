@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+
 import "./word.css";
 
 const WordScrambleGame = () => {
@@ -35,13 +36,14 @@ const WordScrambleGame = () => {
   const [scrambledWord, setScrambledWord] = useState("");
   const [userInput, setUserInput] = useState("");
 
-  const initGame = () => {
+  const initGame = useCallback(() => {
     clearInterval(timer);
-    setTimer(45);
-
-    const randomWordObj = words[Math.floor(Math.random() * words.length)];
-    setCorrectWord(randomWordObj);
-  };
+    setTimer(30);
+  
+    const randomWord = words[Math.floor(Math.random() * words.length)].word;
+    setCorrectWord(randomWord.toLowerCase());
+  }, [timer, words]);
+  
 
   useEffect(() => {
     initGame();
