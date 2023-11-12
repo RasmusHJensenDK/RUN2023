@@ -21,6 +21,10 @@ body {
 }
 
 .container {
+  
+    margin-left: 10px;
+    max-widtH: 85%;
+
   width: 420px;
   border-radius: 10px;
   background: #222;
